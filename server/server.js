@@ -79,3 +79,18 @@ socketServer.on('connection', (socket) => {
 server.listen(PORT, () => {
   console.log(`Streaming service is running on http://localhost:${PORT}`);
 });
+
+socketServer.on('connection', (socket) => {
+  socket.on('event', () => {
+    trackTickers(socket);
+  });
+});
+
+socketServer.on('connection', (socket) => {
+  console.log('new connection');
+
+  socket.on('message', (msg) => {
+    console.log(msg);
+    socket.broadcast.emit('message', trackTickers(socket));
+  })
+});
