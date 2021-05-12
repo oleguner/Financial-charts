@@ -3,23 +3,53 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { connect } from 'react-redux';
-import { createStore } from 'react-redux';
 
-// const initialState = {
+import { connect, Provider } from 'react-redux';
 
-// }
 
-// const rootReducer = (initialState, action) => {
+import { io } from "socket.io-client";
 
-// };
+import { store, ACTION_ADD_DATA } from './state/store';
 
-// const store = createStore();
+const socket = io.connect("http://localhost:4000");
+
+let counter = 0;
+socket.emit('start');
+socket.on('ticker', function (response) {
+  const res = Array.isArray(response) ? response : [response];
+  const json = res.map(item => item);
+
+  store.dispatch({type: ACTION_ADD_DATA, payload: json})
+  
+  console.log('================================================');
+  counter += 1;
+  console.log(counter);
+  // console.log(json[0]);
+  console.log(store.getState());
+
+  console.log('================================================');
+});
+
+
+
+console.log(store.getState());
+
+
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+const WrappedApp = connect(mapStateToProps)(App);
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <WrappedApp />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
