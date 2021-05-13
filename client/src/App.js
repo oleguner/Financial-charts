@@ -2,15 +2,10 @@ import React from 'react';
 import './App.css';
 
 import {
-  BrowserRouter as Router, Route, Switch, Link, useParams
+  BrowserRouter as Router, Route, Switch, Link
 } from "react-router-dom";
 
 import Child from "./components/Apple/Child";
-// import { Google } from "./components/Google/Google";
-// import { Microsoft } from "./components/Microsoft/Microsoft";
-// import { Amazon } from "./components/Amazon/Amazon";
-// import { Facebook } from "./components/Facebook/Facebook";
-// import { Tesla } from "./components/Tesla/Tesla";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 import Home from "./components/Home/Home";
 
@@ -44,13 +39,6 @@ function App() {
             </Link>
           </ul>
           <Switch>
-            {/* <Route exact path="/Apple" component={Apple} />
-            <Route exact path="/Google" component={Google} />
-            <Route exact path="/Microsoft" component={Microsoft} />
-            <Route exact path="/Amazon" component={Amazon} />
-            <Route exact path="/Facebook" component={Facebook} />
-            <Route exact path="/Tesla" component={Tesla} />
-          <Route exact path="/" component={Home} /> */}
             <Route exact path="/" component={Home} />
             <Route path="/:id" children={<Child />} />
             <Route component={PageNotFound} />
@@ -62,15 +50,5 @@ function App() {
     </div>
   );
 }
-
-// function Child() {
-//   let { id } = useParams();
-
-//   return (
-//     <div>
-//       <h3>ID: {id}</h3>
-//     </div>
-//   );
-// }
 
 export default App;

@@ -5,6 +5,8 @@ import './Apple.css';
 
 import { connect } from 'react-redux';
 
+import { utcDate } from '../../state/initialState';
+
 function Child(props) {
   const { id } = useParams();
 
@@ -16,22 +18,43 @@ function Child(props) {
   const companyIndex = companies.indexOf(id);
   const companyName = companiesFullName[companyIndex];
 
+  const now = utcDate().toString();
+
+  let options = 'price';
+
+  const chartData = props[companyIndex][options];
+  const chartTimeLine = props[companyIndex]['last_trade_time']
+    .map(date => {
+      const seconds = ((Date.parse(now) - Date.parse(date)) / 1000);
+
+      console.log(seconds)
+
+      if (seconds === 0) return `now`;
+
+      if (seconds >= 60) {
+        const rest = Math.trunc(((seconds / 60) % 1) * 60)
+        return `${(seconds / 60).toFixed(0)}m ${rest.toFixed(0)}s.a`;
+      } else {
+        return seconds + 's. a.';
+      }
+    });
+
   const chartSettings = {
-    labels: ['50 s.a.', '45 s.a.', '40 s.a.', '35 s.a.','30 s.a.',
-      '25 s.a.', '20 s.a.', '15 s.a.', '10 s.a.', '5 s.a.', 'now'],
+    labels: chartTimeLine,
     datasets: [{
+      fill: true,
       label: `${companyName} change ratio`,
-      data: props[companyIndex]['change'],
+      data: chartData,
       backgroundColor: [
-        'rgba(15, 44, 196, 0.2)',
-        'rgba(184, 97, 99, 0.2)',
-        'rgba(13, 133, 121, 0.2)',
+        'rgba(200, 84, 186, 0.1)',
       ],
       borderColor: [
-        'rgba(253, 99, 153, 1)',
+        'rgba(20, 84, 186, 1)',
       ],
-      borderWidth: 1
-    }]
+      borderWidth: 3,
+      radius: 0,
+      borderDashOffset: "round",
+    }],
   };
 
   return (
