@@ -10,9 +10,7 @@ export const ACTION_ADD_DATA = 'ACTION_ADD_DATA';
 
 const rootReducer = (state = initialState, action) => {
   if (action.type === ACTION_ADD_DATA) {
-    console.log(state['change_percent']);
-
-    if (state[0].price.length <= 20) {
+    if (state[0].price.length <= 23) {
       return state.map((item, index) => ({
         'ticker': `${item.ticker}`,
         'exchange': 'NASDAQ',

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from "react-router-dom";
 
 import { connect, Provider } from 'react-redux';
 
@@ -20,13 +21,6 @@ socket.on('ticker', function (response) {
   const json = res.map(item => item);
 
   store.dispatch({ type: ACTION_ADD_DATA, payload: json })
-
-  // console.log('================================================');
-  counter += 1;
-  console.log(counter);
-  console.log(store.getState());
-
-  console.log('================================================');
 });
 
 const mapStateToProps = (state) => {
@@ -39,9 +33,12 @@ const mapStateToProps = (state) => {
 const WrappedApp = connect(mapStateToProps)(App);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <WrappedApp />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <WrappedApp />
+    </Provider>
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 
