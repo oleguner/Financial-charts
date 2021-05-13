@@ -3,16 +3,16 @@ import { initialState } from './initialState';
 
 export const ACTION_ADD_DATA = 'ACTION_ADD_DATA';
 
-const actionAddData = {
-  type: ACTION_ADD_DATA,
-  payload: null,
-}
+// const actionAddData = {
+//   type: ACTION_ADD_DATA,
+//   payload: null,
+// }
 
 const rootReducer = (state = initialState, action) => {
   if (action.type === ACTION_ADD_DATA) {
     console.log(state['change_percent']);
 
-    if (state[0].price.length <= 9) {
+    if (state[0].price.length <= 10) {
       return state.map((item, index) => ({
         'ticker': `${item.ticker}`,
         'exchange': 'NASDAQ',
