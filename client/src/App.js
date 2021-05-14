@@ -8,30 +8,36 @@ import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 import Home from "./components/Home/Home";
 
 function App() {
+  const handleClick = (clickEvent) => {
+    [...document.querySelectorAll('.company')].map(li => li.classList.remove('active-link'));
+    clickEvent.target.classList.add('active-link');
+    console.log(clickEvent.target.textContent );
+  };
+
   return (
     <div className='App'>
       <header className='App-header'>
         <div className='App-logo'></div>
-        <ul className="company-wrapper">
-          <Link to="/">
+        <ul className="company-wrapper" onClick={handleClick}>
+          <Link className="company-link" to="/">
             <li className="company">HOME</li>
           </Link>
-          <Link to="/AAPL">
+          <Link className="company-link"  to="/AAPL">
             <li className="company">Apple</li>
           </Link>
-          <Link to="/GOOGL">
+          <Link className="company-link"  to="/GOOGL">
             <li className="company">Google</li>
           </Link>
-          <Link to="/MSFT">
+          <Link className="company-link"  to="/MSFT">
             <li className="company">Microsoft</li>
           </Link>
-          <Link to="/AMZN">
+          <Link className="company-link"  to="/AMZN">
             <li className="company">Amazon</li>
           </Link>
-          <Link to="/FB">
+          <Link className="company-link"  to="/FB">
             <li className="company">Facebook</li>
           </Link>
-          <Link to="/TSLA">
+          <Link className="company-link"  to="/TSLA">
             <li className="company">Tesla</li>
           </Link>
         </ul>

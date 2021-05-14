@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { utcDate } from '../../state/initialState';
 
 import {
-  polarChartColors, radarChartColors, barChartColors, lineChartColors
+  polarChartColors, radarChartColors, barChartColors, lineChartColors, chartOptions
 } from './chartsSettings';
 
 function Child(props) {
@@ -60,12 +60,6 @@ function Child(props) {
       borderJoinStyle: "round",
       lineTension: 0.4,
     }],
-    options: {
-      aimation: {
-        duration: 2000,
-        easing: 'easeInOutQuint'
-      }
-    }
   };
 
   useEffect(() => {
@@ -99,94 +93,99 @@ function Child(props) {
     <div className="chart-wrapper">
       <div className="button-wrapper">
 
-        <div className="chart-type">
-          <h4 className="chart-type-header">Set the chart type</h4>
-          <ButtonGroup className="mb-2" onClick={handleClick}>
-            <Button
-              variant={chartType === 'Line' ? "primary"
-                : "outline-primary"}
-              name="Line"
-            >
-              Line
-            </Button>
-            <Button
-              variant={chartType === 'Bar' ? "primary"
-                : "outline-primary"}
-              name="Bar"
-            >
-              Bar
-            </Button>
-            <Button
-              variant={chartType === 'Radar' ? "primary"
-                : "outline-primary"}
-              name="Radar"
-            >
-              Radar
-            </Button>
-            <Button
-              variant={chartType === 'PolarArea' ? "primary"
-                : "outline-primary"}
-              name="PolarArea"
-            >
-              PolarArea
-            </Button>
-          </ButtonGroup>
+        <div>
+          <h3>Chart is {chartType}</h3>
+          <h3>Quotation is {quotes}</h3>
         </div>
-        <div className="chart-type">
-          <h4 className="chart-type-header">Set the quotes</h4>
-          <ButtonGroup className="mb-2" onClick={handleClick}>
-            <Button
-              variant={quotes === 'price' ? "primary"
-                : "outline-primary"}
-              name="price"
-            >
-              Price
+        <div>
+          <div className="chart-type">
+            <h4 className="chart-type-header">Set the chart type</h4>
+            <ButtonGroup className="mb-2" onClick={handleClick}>
+              <Button
+                variant={chartType === 'Line' ? "primary"
+                  : "outline-primary"}
+                name="Line"
+              >
+                Line
             </Button>
-            <Button
-              variant={quotes === 'change' ? "primary"
-                : "outline-primary"}
-              name="change"
-            >
-              Change
+              <Button
+                variant={chartType === 'Bar' ? "primary"
+                  : "outline-primary"}
+                name="Bar"
+              >
+                Bar
             </Button>
-            <Button
-              variant={quotes === 'change_percent' ? "primary"
-                : "outline-primary"}
-              name="change_percent"
-            >
-              Change percent
+              <Button
+                variant={chartType === 'Radar' ? "primary"
+                  : "outline-primary"}
+                name="Radar"
+              >
+                Radar
             </Button>
-            <Button
-              variant={quotes === 'dividend' ? "primary"
-                : "outline-primary"}
-              name="dividend"
-            >
-              Dividend
+              <Button
+                variant={chartType === 'PolarArea' ? "primary"
+                  : "outline-primary"}
+                name="PolarArea"
+              >
+                PolarArea
             </Button>
-            <Button
-              variant={quotes === 'yield' ? "primary"
-                : "outline-primary"}
-              name="yield"
-            >
-              Yield
+            </ButtonGroup>
+
+            <div className="chart-type">
+              <h4 className="chart-type-header">Set the quotes</h4>
+              <ButtonGroup className="mb-2" onClick={handleClick}>
+                <Button
+                  variant={quotes === 'price' ? "primary"
+                    : "outline-primary"}
+                  name="price"
+                >
+                  Price
             </Button>
-          </ButtonGroup>
+                <Button
+                  variant={quotes === 'change' ? "primary"
+                    : "outline-primary"}
+                  name="change"
+                >
+                  Change
+            </Button>
+                <Button
+                  variant={quotes === 'change_percent' ? "primary"
+                    : "outline-primary"}
+                  name="change_percent"
+                >
+                  Change percent
+            </Button>
+                <Button
+                  variant={quotes === 'dividend' ? "primary"
+                    : "outline-primary"}
+                  name="dividend"
+                >
+                  Dividend
+            </Button>
+                <Button
+                  variant={quotes === 'yield' ? "primary"
+                    : "outline-primary"}
+                  name="yield"
+                >
+                  Yield
+            </Button>
+              </ButtonGroup>
+            </div>
+          </div>
         </div>
       </div>
       <div className="chart">
         {chartType === 'Line' &&
           <Line
             data={chartSettings}
-            width={90}
-            height={45}
-            options={{ maintainAspectRatio: false }}
+            options={chartOptions}
           />}
         {chartType === 'Bar' &&
           <Bar
             data={chartSettings}
             width={90}
             height={45}
-            options={{ maintainAspectRatio: false }}
+            options={chartOptions}
           />}
         {chartType === 'Radar' &&
           <Radar

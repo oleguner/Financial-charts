@@ -2,7 +2,14 @@
   min-height: max-content;
 }
 
+.active-link {
+  background: #f7f7f7;
+}
+
 .App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 60px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
@@ -33,11 +40,15 @@
 
 .company {
   display: inline-block;
-  height: 100%;
-  width: 10%;
+  height: 113%;
   border-left: 1px dotted rgba(182, 180, 180, 0.5);
   border-right: 1px dotted rgb(182, 180, 180, 0.5);
   font-size: 24px;
   text-align: center;
-  padding-top: 10px;
+  padding: 18px 10px 10px;
+  color: #0069d9;
+}
+
+.company-link:hover .company{
+  background: #f7f7f760;
 }
